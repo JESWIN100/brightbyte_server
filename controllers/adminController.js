@@ -33,7 +33,8 @@ export const register=asyncHandler(async(req,res)=>{
   
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
   
-    res.cookie('Admintoken', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+    res.cookie('Admintoken', token, { httpOnly: true,  sameSite: 'None',
+      secure: true, secure: process.env.NODE_ENV === 'production' });
   
     res.status(200).json({ success: true, message: 'Admin logged in successfully', token });
   });
